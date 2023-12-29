@@ -1,5 +1,5 @@
 class Person < ApplicationRecord
-  has_many :addresses, class_name: 'Address', foreign_key: 'dni', dependent: :destroy
+  has_many :addresses, dependent: :destroy
 
   validates :dni, numericality: { only_integer: true, greater_than: 0 }
   validates :dni, length: { is: 8 }

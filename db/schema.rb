@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_29_154253) do
     t.string "calle", null: false
     t.integer "numero", null: false
     t.text "ciudad", null: false
+    t.bigint "person_dni", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,4 +32,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_29_154253) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "people", column: "person_dni", primary_key: "dni", on_delete: :cascade
 end
