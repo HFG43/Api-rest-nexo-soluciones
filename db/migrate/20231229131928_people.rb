@@ -1,6 +1,6 @@
-class CreatePersons < ActiveRecord::Migration[7.0]
+class People < ActiveRecord::Migration[7.0]
   def change
-    create_table :persons, :id => false do |t|
+    create_table :people, :id => false do |t|
       t.bigserial :dni, primary_key: true
       t.string :nombre, null: false
       t.string :apellido, null: false
