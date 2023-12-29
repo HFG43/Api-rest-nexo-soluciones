@@ -1,0 +1,27 @@
+<div class="category_show_container category_show bg">
+<%= form_with model: [@person], local:true do |form| %>
+  <div class="category_data_container input_container">
+    <%= form.label :nombre, "Nombre", class: 'reg_text_col'%>
+    <%= form.text_field :nombre, :required => true  %> 
+  </div>
+  <div class="category_data_container input_container">
+    <%= form.label :apellido, "Apellido", class: 'reg_text_col'%>
+    <%= form.text_field :apellido, :required => true %>
+  </div>
+  <div class="category_data_container input_container">
+    <%= form.label :edad, "Edad", class: 'reg_text_col'%>
+    <%= form.number_field :edad, :required => true %>
+  </div>
+  <div class="category_data_container input_container">
+    <%= form.label :foto, "Foto", class: 'reg_text_col'%>
+    <%= form.text_field :foto, :required => true %>
+  </div>
+  <div class="category_data_container input_container">
+    <%= form.label :dni, "DNI", class: 'reg_text_col'%>
+    <%= form.number_field :dni, :required => true %>
+  </div>
+  <div class="bottom_button_container">
+    <%= form.submit "Crear Nueva Persona", class: 'bottom_button' %>
+  </div>
+<% end %>
+</div>
