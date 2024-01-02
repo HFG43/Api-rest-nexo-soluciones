@@ -1,0 +1,27 @@
+<div>
+<%= form_with model: [@person], local:true do |form| %>
+  <div>
+    <%= form.label :nombre, "Nombre"%>
+    <%= form.text_field :nombre, :required => true  %> 
+  </div>
+  <div>
+    <%= form.label :apellido, "Apellido"%>
+    <%= form.text_field :apellido, :required => true %>
+  </div>
+  <div>
+    <%= form.label :edad, "Edad"%>
+    <%= form.number_field :edad, :required => true %>
+  </div>
+  <div>
+    <%= form.label :foto, "Foto"%>
+    <%= form.text_field :foto, :required => true %>
+  </div>
+  <div>
+    <%= form.label :dni, "DNI"%>
+    <%= form.number_field :dni, :required => true %>
+  </div>
+  <div>
+    <%= form.submit "Crear Nueva Persona" %>
+  </div>
+<% end %>
+</div>
