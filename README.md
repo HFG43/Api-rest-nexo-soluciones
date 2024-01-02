@@ -78,11 +78,11 @@
 
 <!-- ERD -->
 
-### ERD  <a name="front-end"></a>
+### ERD  <a name="erd"></a>
 
 On the following ERD you can see the structure of this project.
 
-<img src="assets/images/ERD.png" alt="ERD" width=900px />
+<img src="/app/assets/images/ERD.png" alt="ERD" width=900px />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
