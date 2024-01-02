@@ -29,7 +29,8 @@ RSpec.describe 'api/people', type: :request do
                required: %w[status message data]
 
         let(:id) do
-          Person.create(dni: Faker::Number.unique.number(digits: 8), nombre: 'Hernan', apellido: 'Guemes', edad: 44, foto: 'subitufoto.com').dni
+          Person.create(dni: Faker::Number.unique.number(digits: 8), nombre: 'Hernan', apellido: 'Guemes', edad: 44,
+                        foto: 'subitufoto.com').dni
         end
         run_test!
       end
@@ -71,11 +72,11 @@ RSpec.describe 'api/people', type: :request do
       response '200', 'Persona por DNI' do
         schema type: :object,
                properties: {
-                 status: { type: :string, example: 'SUCCESS' }, message: { type: :string, example: 'Listado de Personas' },
+                 status: { type: :string, example: 'SUCCESS' }, message: { type: :string, example: 'Listado de Personas' }, # rubocop:disable Layout/LineLength
                  data: {
                    type: :object,
                    properties: {
-                     dni: { type: :bigserial }, nombre: { type: :string }, apellido: { type: :string }, edad: { type: :integer }, foto: { type: :string },
+                     dni: { type: :bigserial }, nombre: { type: :string }, apellido: { type: :string }, edad: { type: :integer }, foto: { type: :string }, # rubocop:disable Layout/LineLength
                      addresses: {
                        type: :array,
                        items: {
