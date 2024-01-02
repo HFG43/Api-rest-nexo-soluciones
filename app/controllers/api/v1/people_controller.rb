@@ -47,6 +47,8 @@ class Api::V1::PeopleController < ApplicationController
         }
       )
     }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'DNI no encontrado' }, status: 500
   end
 
   def update
@@ -74,13 +76,13 @@ class Api::V1::PeopleController < ApplicationController
       render json: {
         status: 'SUCCESS',
         message: 'Persona Eliminada de la Base',
-        data: @person.as_json
+        data: person.as_json
       }, status: :ok
     else
       render json: {
         status: 'ERROR',
         message: 'No se pudo eliminar la persona',
-        data: @person.errors.full_messages
+        data: person.errors.full_messages
       }, status: :unprocessable_entity
     end
   end

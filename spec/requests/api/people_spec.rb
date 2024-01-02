@@ -29,7 +29,7 @@ RSpec.describe 'api/people', type: :request do
                required: %w[status message data]
 
         let(:id) do
-          Person.create(dni: 28_311_542, nombre: 'Hernan', apellido: 'Guemes', edad: 44, foto: 'subitufoto.com').dni
+          Person.create(dni: Faker::Number.unique.number(digits: 8), nombre: 'Hernan', apellido: 'Guemes', edad: 44, foto: 'subitufoto.com').dni
         end
         run_test!
       end
@@ -43,7 +43,7 @@ RSpec.describe 'api/people', type: :request do
       parameter name: :person, in: :body, schema: {
         type: :object,
         properties: {
-          dni: { type: :bigserial },
+          dni: { type: :integer },
           nombre: { type: :string },
           apellido: { type: :string },
           edad: { type: :integer },
@@ -54,10 +54,87 @@ RSpec.describe 'api/people', type: :request do
 
       response '200', 'Persona Creada' do
         let(:person) do
-          Person.new(dni: Faker::Number.unique.number(digits: 8), nombre: 'Nombre Test', apellido: 'Apellido Test', edad: 40, foto: 'subitufoto.com')
+          { dni: 11_111_111, nombre: 'Nombre Test', apellido: 'Apellido Test',
+            edad: 40, foto: 'subitufoto.com' }
         end
         run_test!
       end
     end
   end
+
+  path '/api/v1/people/{dni}' do # rubocop:disable Metrics/BlockLength
+    get 'Retrieves an specific Person' do # rubocop:disable Metrics/BlockLength
+      tags 'People'
+      produces 'application/json'
+      parameter name: :dni, in: :path, type: :string
+
+      response '200', 'Persona por DNI' do
+        schema type: :object,
+               properties: {
+                 status: { type: :string, example: 'SUCCESS' }, message: { type: :string, example: 'Listado de Personas' },
+                 data: {
+                   type: :object,
+                   properties: {
+                     dni: { type: :bigserial }, nombre: { type: :string }, apellido: { type: :string }, edad: { type: :integer }, foto: { type: :string },
+                     addresses: {
+                       type: :array,
+                       items: {
+                         type: :object,
+                         properties: {
+                           id: { type: :integer },
+                           calle: { type: :string },
+                           numero: { type: :integer },
+                           ciudad: { type: :string }
+                         },
+                         required: %w[id calle numero ciudad]
+                       }
+                     }
+                   },
+                   required: %w[dni nombre apellido edad foto addresses]
+                 }
+               },
+               required: %w[status message data]
+
+        let(:dni) do
+          Person.create(dni: Faker::Number.unique.number(digits: 8), nombre: 'Hernan', apellido: 'Guemes', edad: 44,
+                        foto: 'subitufoto.com', addresses: []).dni
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/people/{dni}' do
+    delete 'Deletes an specific Person' do
+      tags 'People'
+      produces 'application/json'
+      parameter name: :dni, in: :path, type: :string
+
+      response '200', 'Persona Eliminada de la Base' do
+        schema type: :object,
+               properties: {
+                 status: { type: :string, example: 'SUCCESS' },
+                 message: { type: :string, example: 'Persona Eliminada de la Base' },
+                 data: {
+                   type: :object,
+                   properties: {
+                     dni: { type: :bigserial },
+                     nombre: { type: :string },
+                     apellido: { type: :string },
+                     edad: { type: :integer },
+                     foto: { type: :string }
+                   },
+                   required: %w[dni nombre apellido edad foto]
+                 }
+               }
+
+        let(:dni) do
+          Person.create(dni: Faker::Number.unique.number(digits: 8), nombre: 'Hernan', apellido: 'Guemes', edad: 44,
+                        foto: 'subitufoto.com').dni
+        end
+        run_test!
+      end
+    end
+  end
+
 end
