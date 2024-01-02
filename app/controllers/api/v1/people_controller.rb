@@ -23,7 +23,6 @@ class Api::V1::PeopleController < ApplicationController
 
   def index
     @people = filtered_people.order('created_at DESC')
-
     render json: {
       status: 'SUCCESS',
       message: 'Listado de Personas',

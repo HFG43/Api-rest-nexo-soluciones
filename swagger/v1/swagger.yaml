@@ -1,0 +1,53 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/people":
+    get:
+      summary: Retrieves all Person
+      responses:
+        '200':
+          description: Listado de Personas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: SUCCESS
+                  message:
+                    type: string
+                    example: Listado de Personas
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        dni:
+                          type: bigserial
+                        nombre:
+                          type: string
+                        apellido:
+                          type: string
+                        edad:
+                          type: integer
+                        foto:
+                          type: string
+                      required:
+                      - dni
+                      - nombre
+                      - apellido
+                      - edad
+                      - foto
+                required:
+                - status
+                - message
+                - data
+servers:
+- url: http://localhost:3000
+  variables:
+    defaultHost:
+      default: localhost:3000
