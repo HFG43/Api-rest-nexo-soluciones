@@ -23,6 +23,7 @@ class Api::V1::PeopleController < ApplicationController
 
   def index
     @people = filtered_people.order('created_at DESC')
+
     render json: {
       status: 'SUCCESS',
       message: 'Listado de Personas',
@@ -82,6 +83,24 @@ class Api::V1::PeopleController < ApplicationController
         message: 'No se pudo eliminar la persona',
         data: @person.errors.full_messages
       }, status: :unprocessable_entity
+    end
+  end
+
+  def export_csv
+    @people = Person.all
+
+    respond_to do |format|
+      format.csv do
+        csv_data = CSV.generate(headers: true) do |csv|
+          csv << %w[dni nombre apellido edad]
+
+          @people.each do |person|
+            csv << [person.dni, person.nombre, person.apellido, person.edad]
+          end
+        end
+
+        send_data csv_data, filename: 'listado_de_personas.csv'
+      end
     end
   end
 
