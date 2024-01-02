@@ -52,7 +52,7 @@ class Api::V1::PeopleController < ApplicationController
   end
 
   def update
-    @person = Person.find_by(dni: params[:id])
+    @person = Person.find_by(dni: params[:dni])
 
     if @person.update(person_params)
       render json: {

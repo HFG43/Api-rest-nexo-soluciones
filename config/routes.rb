@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :people, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
         resources :addresses, only: [:new, :create]
         collection do
-          get 'export_csv'
+          get 'export_csv'       
         end  
       end
     end    

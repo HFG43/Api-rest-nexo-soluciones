@@ -64,7 +64,7 @@ RSpec.describe 'api/people', type: :request do
 
   path '/api/v1/people/{dni}' do # rubocop:disable Metrics/BlockLength
     get 'Retrieves an specific Person' do # rubocop:disable Metrics/BlockLength
-      tags 'People'
+      tags 'Person'
       produces 'application/json'
       parameter name: :dni, in: :path, type: :string
 
@@ -106,7 +106,7 @@ RSpec.describe 'api/people', type: :request do
 
   path '/api/v1/people/{dni}' do
     delete 'Deletes an specific Person' do
-      tags 'People'
+      tags 'Person'
       produces 'application/json'
       parameter name: :dni, in: :path, type: :string
 
@@ -137,4 +137,35 @@ RSpec.describe 'api/people', type: :request do
     end
   end
 
+  # path '/api/v1/people/{dni}' do
+  #   patch 'Updates an specific Person' do
+  #     tags 'Person'
+  #     consumes 'application/json'
+  #     parameter name: :dni, in: :path, type: :string
+  #     schema type: :object,
+  #            properties: {
+  #              status: { type: :string, example: 'SUCCESS' },
+  #              message: { type: :string, example: 'Persona Actualizada' },
+  #              data: {
+  #                type: :object,
+  #                properties: {
+  #                  dni: { type: :integer },
+  #                  nombre: { type: :string },
+  #                  apellido: { type: :string },
+  #                  edad: { type: :integer },
+  #                  foto: { type: :string }
+  #                },
+  #                required: %w[dni nombre apellido edad foto]
+  #              }
+  #            }
+
+  #     response '200', 'Persona Actualizada' do
+  #       let(:person) do
+  #         { dni: 11_111_111, nombre: 'Nombre Test', apellido: 'Apellido Test',
+  #           edad: 40, foto: 'subitufoto.com' }
+  #       end
+  #       run_test!
+  #     end
+  #   end
+  # end
 end
