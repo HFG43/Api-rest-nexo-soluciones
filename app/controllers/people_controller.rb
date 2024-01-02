@@ -80,7 +80,7 @@ class PeopleController < ApplicationController
       render json: {
         status: 'ERROR',
         message: 'No se pudo eliminar la persona',
-        data: @erson.errors.full_messages
+        data: @person.errors.full_messages
       }, status: :unprocessable_entity
     end
   end
