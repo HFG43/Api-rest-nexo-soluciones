@@ -52,7 +52,7 @@ class Api::V1::PeopleController < ApplicationController
   end
 
   def update
-    @person = Person.find_by(dni: params[:dni])
+    @person = Person.find(params[:id])
 
     if @person.update(person_params)
       render json: {
@@ -70,14 +70,10 @@ class Api::V1::PeopleController < ApplicationController
   end
 
   def destroy
-    person = Person.find_by(dni: params[:id])
+    person = Person.find(params[:id])
 
     if person.destroy
-      render json: {
-        status: 'SUCCESS',
-        message: 'Persona Eliminada de la Base',
-        data: person.as_json
-      }, status: :ok
+      render json: person
     else
       render json: {
         status: 'ERROR',
