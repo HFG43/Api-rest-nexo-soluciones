@@ -1,4 +1,4 @@
-class AddressesController < ApplicationController
+class Api::V1::AddressesController < ApplicationController
   def new
     @address = Address.new
   end
